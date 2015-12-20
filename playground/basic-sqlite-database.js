@@ -1,8 +1,6 @@
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize(undefined, undefined, undefined, {
-	// tell which database you want to use
 	'dialect': 'sqlite',
-	// storage path (specific to sqlite)
 	'storage': __dirname + '/basic-sqlite-database.sqlite'
 });
 
@@ -36,9 +34,7 @@ sequelize.sync({
 	User.findById(1).then(function (user) {
 		user.getTodos({
 			where: {
-				description: {
-					$like: '%make%'
-				}
+				completed: false
 			}
 		}).then(function (todos) {
 			todos.forEach(function (todo) {
@@ -48,10 +44,10 @@ sequelize.sync({
 	});
 
 	// User.create({
-	// 	email: 'mike@example.com'
-	// }).then(function() {
+	// 	email: 'andrew@example.com'
+	// }).then(function () {
 	// 	return Todo.create({
-	// 		description: 'Make dinner with Kera'
+	// 		description: 'Clean yard'
 	// 	});
 	// }).then(function (todo) {
 	// 	User.findById(1).then(function (user) {
